@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mostrar información del curso</title>
+</head>
+<body>
+    {% for curso in cursos %}
+    <h1>estudiantes del {curso.nombre}</h1>
+    <table border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+        </tr>
+        
+        <tr>
+            <td>{{ curso.nombre }}</td>
+            <td>{{ curso.descripcion }}</td>
+            <td>{{ curso.edad }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
