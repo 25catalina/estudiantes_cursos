@@ -21,3 +21,11 @@ class Curso:
         query = "INSERT INTO cursos (nombre, created_at, updated_at) VALUES (%(nombre)s, NOW(), NOW());"
         resultado = connectToMySQL("esquema_estudiantes_cursos").query_db(query, data)
         return resultado
+
+    @classmethod
+    def get_one(cls, data):
+        query = "SELECT * FROM cursos WHERE id = %(id)s;"
+        results = connectToMySQL('esquema_estudiantes_cursos').query_db(query, data)
+        if results:
+            return cls(results[0])
+        return None

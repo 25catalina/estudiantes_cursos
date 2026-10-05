@@ -9,7 +9,7 @@
     <h1>crear estudiante</h1>
     <form action="/guardar_estudiante" method="POST">
        <label for="curso">curso:</label>
-<select id="curso" name="curso" required>
+<select id="curso" name="curso_id" required>
     <option value="">Seleccione un curso</option>
     {% for curso in cursos %}
         <option value="{{ curso.id }}">{{ curso.nombre }}</option>
@@ -30,5 +30,6 @@
         <br>
         <input type="submit" value="crear estudiante" />
     </form>
+    <a href="/cursos">Inicio</a>
 </body>
 </html>

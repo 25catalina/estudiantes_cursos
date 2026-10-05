@@ -6,23 +6,28 @@ from flask import render_template,redirect,request,session,flash
 #importamos la clase que estamos controlando
 
 from flask_app.models.curso import Curso
+from flask_app.models.estudiante import Estudiante
 
-@app.route("/", methods=["GET", "POST"])
-def registro():
+@app.route("/")
+def inicio():
+    return redirect("/cursos")
+
+@app.route("/cursos")
+def cursos_page():
     cursos = Curso.get_all()
-    print(cursos)
     return render_template("menu.html", cursos=cursos)
 
-@app.route('/guardar_curso', methods=["POST"])
-def guardar():
+@app.route("/crear_curso", methods=["POST"])
+def crear_curso():
     data = {
-        "nombre": request.form['nombre'],
+        "nombre": request.form["nombre"]
     }
     Curso.save(data)
-    return redirect("/mostrar_cursos")
+    return redirect("/cursos")
 
-
-@app.route("/mostrar_cursos")
-def mostrar_cursos():
-    cursos = Curso.get_all()
-    return render_template("mostrar_cursos.html", cursos=cursos)
+@app.route("/cursos/<int:id>")
+def mostrar_curso(id):
+    datos = {"id": id}
+    curso = Curso.get_one(datos)
+    estudiantes = Estudiante.get_estudiantes_de_curso(datos)
+    return render_template("mostrar_cursos.html", curso=curso, estudiantes=estudiantes)
